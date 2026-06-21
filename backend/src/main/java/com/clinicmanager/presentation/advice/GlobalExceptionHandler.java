@@ -3,6 +3,12 @@ package com.clinicmanager.presentation.advice;
 import com.clinicmanager.domain.exception.BusinessException;
 import com.clinicmanager.domain.exception.patient.PatientAlreadyExistsException;
 import com.clinicmanager.domain.exception.patient.PatientNotFoundException;
+import com.clinicmanager.domain.exception.service.MedicalServiceAlreadyExistsException;
+import com.clinicmanager.domain.exception.service.MedicalServiceNotFoundException;
+import com.clinicmanager.domain.exception.medicine.MedicineAlreadyExistsException;
+import com.clinicmanager.domain.exception.medicine.MedicineNotFoundException;
+import com.clinicmanager.domain.exception.user.UserAlreadyExistsException;
+import com.clinicmanager.domain.exception.user.UserNotFoundException;
 import com.clinicmanager.presentation.response.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -25,6 +31,42 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.CONFLICT)
     public ApiResponse<Void> handlePatientAlreadyExistsException(PatientAlreadyExistsException ex) {
         return ApiResponse.error("PATIENT_ALREADY_EXISTS", ex.getMessage());
+    }
+
+    @ExceptionHandler(MedicalServiceNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiResponse<Void> handleMedicalServiceNotFoundException(MedicalServiceNotFoundException ex) {
+        return ApiResponse.error("SERVICE_NOT_FOUND", ex.getMessage());
+    }
+
+    @ExceptionHandler(MedicalServiceAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ApiResponse<Void> handleMedicalServiceAlreadyExistsException(MedicalServiceAlreadyExistsException ex) {
+        return ApiResponse.error("SERVICE_ALREADY_EXISTS", ex.getMessage());
+    }
+
+    @ExceptionHandler(MedicineNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiResponse<Void> handleMedicineNotFoundException(MedicineNotFoundException ex) {
+        return ApiResponse.error("MEDICINE_NOT_FOUND", ex.getMessage());
+    }
+
+    @ExceptionHandler(MedicineAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ApiResponse<Void> handleMedicineAlreadyExistsException(MedicineAlreadyExistsException ex) {
+        return ApiResponse.error("MEDICINE_ALREADY_EXISTS", ex.getMessage());
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiResponse<Void> handleUserNotFoundException(UserNotFoundException ex) {
+        return ApiResponse.error("USER_NOT_FOUND", ex.getMessage());
+    }
+
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ApiResponse<Void> handleUserAlreadyExistsException(UserAlreadyExistsException ex) {
+        return ApiResponse.error("USER_ALREADY_EXISTS", ex.getMessage());
     }
 
     @ExceptionHandler(BusinessException.class)
