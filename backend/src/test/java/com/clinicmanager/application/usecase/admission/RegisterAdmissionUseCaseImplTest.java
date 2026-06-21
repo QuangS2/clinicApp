@@ -84,7 +84,7 @@ class RegisterAdmissionUseCaseImplTest {
                 LocalDate.now(),
                 MedicalSlipStatus.WAITING,
                 patientId,
-                null, null, null, null, null, null
+                null, null, null, null, null, null, null
         );
 
         expectedDto = MedicalSlipDto.builder()

@@ -48,4 +48,7 @@ public class MedicalSlipEntity {
 
     @Column(name = "chieu_cao", precision = 5, scale = 2)
     private Double height;
+
+    @Column(name = "chan_doan", length = 1000)
+    private String diagnosis;
 }

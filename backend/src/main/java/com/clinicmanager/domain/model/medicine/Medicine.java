@@ -57,4 +57,14 @@ public class Medicine {
     public int getStockQuantity() {
         return stockQuantity;
     }
+
+    public Medicine deductStock(int quantity) {
+        if (quantity <= 0) {
+            throw new InvalidMedicineDataException("Số lượng trừ kho phải lớn hơn 0.");
+        }
+        if (this.stockQuantity < quantity) {
+            throw new InvalidMedicineDataException("Số lượng tồn kho không đủ (Tồn kho: " + this.stockQuantity + ").");
+        }
+        return new Medicine(this.id, this.name, this.unit, this.price, this.stockQuantity - quantity);
+    }
 }

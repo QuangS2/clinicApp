@@ -58,7 +58,7 @@ class PerformLabTestUseCaseImplTest {
                 LocalDate.now(),
                 MedicalSlipStatus.EXAMINING,
                 UUID.randomUUID(),
-                null, null, null, null, null, null
+                null, null, null, null, null, null, null
         );
 
         waitingSlip = new MedicalSlip(
@@ -66,7 +66,7 @@ class PerformLabTestUseCaseImplTest {
                 LocalDate.now(),
                 MedicalSlipStatus.WAITING,
                 UUID.randomUUID(),
-                null, null, null, null, null, null
+                null, null, null, null, null, null, null
         );
 
         request = PerformLabTestRequest.builder()

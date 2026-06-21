@@ -17,10 +17,11 @@ public class MedicalSlip {
     private final String bloodPressure;
     private final Double weight;
     private final Double height;
+    private final String diagnosis;
 
     public MedicalSlip(UUID id, LocalDate examinationDate, MedicalSlipStatus status, UUID patientId,
                        String symptoms, Integer pulse, Double temperature, String bloodPressure,
-                       Double weight, Double height) {
+                       Double weight, Double height, String diagnosis) {
         this.id = id != null ? id : UUID.randomUUID();
         this.examinationDate = examinationDate;
         this.status = status != null ? status : MedicalSlipStatus.WAITING;
@@ -31,6 +32,7 @@ public class MedicalSlip {
         this.bloodPressure = bloodPressure;
         this.weight = weight;
         this.height = height;
+        this.diagnosis = diagnosis;
         validate();
     }
 
@@ -69,7 +71,7 @@ public class MedicalSlip {
         }
 
         return new MedicalSlip(this.id, this.examinationDate, MedicalSlipStatus.EXAMINING, this.patientId,
-                symptoms, pulse, temperature, bloodPressure, weight, height);
+                symptoms, pulse, temperature, bloodPressure, weight, height, this.diagnosis);
     }
 
     public UUID getId() {
@@ -110,5 +112,31 @@ public class MedicalSlip {
 
     public Double getHeight() {
         return height;
+    }
+
+    public MedicalSlip diagnose(String diagnosis) {
+        if (this.status != MedicalSlipStatus.EXAMINING) {
+            throw new InvalidMedicalSlipDataException("Chỉ có thể chẩn đoán bệnh khi phiếu khám ở trạng thái EXAMINING.");
+        }
+        if (diagnosis == null || diagnosis.trim().isEmpty()) {
+            throw new InvalidMedicalSlipDataException("Chẩn đoán không được để trống.");
+        }
+        return new MedicalSlip(this.id, this.examinationDate, this.status, this.patientId,
+                this.symptoms, this.pulse, this.temperature, this.bloodPressure, this.weight, this.height, diagnosis);
+    }
+
+    public String getDiagnosis() {
+        return diagnosis;
+    }
+
+    public MedicalSlip complete() {
+        if (this.status != MedicalSlipStatus.EXAMINING) {
+            throw new InvalidMedicalSlipDataException("Chỉ có thể hoàn thành phiếu khám khi ở trạng thái EXAMINING.");
+        }
+        if (this.diagnosis == null || this.diagnosis.trim().isEmpty()) {
+            throw new InvalidMedicalSlipDataException("Chỉ có thể hoàn thành phiếu khám khi đã có chẩn đoán bệnh.");
+        }
+        return new MedicalSlip(this.id, this.examinationDate, MedicalSlipStatus.COMPLETED, this.patientId,
+                this.symptoms, this.pulse, this.temperature, this.bloodPressure, this.weight, this.height, this.diagnosis);
     }
 }

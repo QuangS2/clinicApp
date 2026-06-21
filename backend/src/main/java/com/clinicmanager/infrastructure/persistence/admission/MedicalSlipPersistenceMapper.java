@@ -32,7 +32,8 @@ public interface MedicalSlipPersistenceMapper {
             entity.getTemperature(),
             entity.getBloodPressure(),
             entity.getWeight(),
-            entity.getHeight()
+            entity.getHeight(),
+            entity.getDiagnosis()
         );
     }
 }

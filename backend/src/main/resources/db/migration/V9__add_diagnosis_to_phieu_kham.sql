@@ -1,0 +1,2 @@
+ALTER TABLE phieu_kham
+ADD COLUMN chan_doan VARCHAR(1000);

@@ -61,7 +61,7 @@ class UpdateLabTestResultUseCaseImplTest {
                 LocalDate.now(),
                 MedicalSlipStatus.EXAMINING,
                 UUID.randomUUID(),
-                null, null, null, null, null, null
+                null, null, null, null, null, null, null
         );
 
         waitingSlip = new MedicalSlip(
@@ -69,7 +69,7 @@ class UpdateLabTestResultUseCaseImplTest {
                 LocalDate.now(),
                 MedicalSlipStatus.WAITING,
                 UUID.randomUUID(),
-                null, null, null, null, null, null
+                null, null, null, null, null, null, null
         );
 
         request = UpdateLabTestResultRequest.builder()

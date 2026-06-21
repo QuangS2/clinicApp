@@ -13,6 +13,8 @@ import com.clinicmanager.domain.exception.appointment.AppointmentNotFoundExcepti
 import com.clinicmanager.domain.exception.admission.MedicalSlipNotFoundException;
 import com.clinicmanager.domain.exception.admission.PatientAlreadyRegisteredException;
 import com.clinicmanager.domain.exception.examination.LabTestNotFoundException;
+import com.clinicmanager.domain.exception.examination.MedicalRecordNotFoundException;
+import com.clinicmanager.domain.exception.examination.PrescriptionNotFoundException;
 import com.clinicmanager.presentation.response.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -47,6 +49,18 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ApiResponse<Void> handleLabTestNotFoundException(LabTestNotFoundException ex) {
         return ApiResponse.error("LAB_TEST_NOT_FOUND", ex.getMessage());
+    }
+
+    @ExceptionHandler(PrescriptionNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiResponse<Void> handlePrescriptionNotFoundException(PrescriptionNotFoundException ex) {
+        return ApiResponse.error("PRESCRIPTION_NOT_FOUND", ex.getMessage());
+    }
+
+    @ExceptionHandler(MedicalRecordNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiResponse<Void> handleMedicalRecordNotFoundException(MedicalRecordNotFoundException ex) {
+        return ApiResponse.error("MEDICAL_RECORD_NOT_FOUND", ex.getMessage());
     }
 
     @ExceptionHandler(PatientAlreadyRegisteredException.class)

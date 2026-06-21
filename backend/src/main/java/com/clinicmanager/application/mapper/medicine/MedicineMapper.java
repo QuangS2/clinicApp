@@ -11,5 +11,6 @@ public interface MedicineMapper {
     MedicineDto toDto(Medicine domain);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "deductStock", ignore = true)
     Medicine toDomain(CreateMedicineRequest request);
 }

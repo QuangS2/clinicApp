@@ -54,7 +54,7 @@ class OrderLabTestsUseCaseImplTest {
                 LocalDate.now(),
                 MedicalSlipStatus.EXAMINING,
                 UUID.randomUUID(),
-                null, null, null, null, null, null
+                null, null, null, null, null, null, null
         );
 
         waitingSlip = new MedicalSlip(
@@ -62,7 +62,7 @@ class OrderLabTestsUseCaseImplTest {
                 LocalDate.now(),
                 MedicalSlipStatus.WAITING,
                 UUID.randomUUID(),
-                null, null, null, null, null, null
+                null, null, null, null, null, null, null
         );
 
         validRequest = OrderLabTestsRequest.builder()

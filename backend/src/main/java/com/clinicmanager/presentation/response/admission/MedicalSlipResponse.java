@@ -22,4 +22,5 @@ public class MedicalSlipResponse {
     private String bloodPressure;
     private Double weight;
     private Double height;
+    private String diagnosis;
 }

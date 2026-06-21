@@ -19,5 +19,7 @@ public interface MedicalSlipMapper {
     @Mapping(target = "bloodPressure", ignore = true)
     @Mapping(target = "weight", ignore = true)
     @Mapping(target = "height", ignore = true)
+    @Mapping(target = "diagnosis", ignore = true)
+    @Mapping(target = "diagnose", ignore = true)
     MedicalSlip toDomain(RegisterAdmissionRequest request);
 }

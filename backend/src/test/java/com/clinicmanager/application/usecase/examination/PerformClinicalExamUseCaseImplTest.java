@@ -48,7 +48,7 @@ class PerformClinicalExamUseCaseImplTest {
                 LocalDate.now(),
                 MedicalSlipStatus.WAITING,
                 UUID.randomUUID(),
-                null, null, null, null, null, null
+                null, null, null, null, null, null, null
         );
 
         validRequest = PerformClinicalExamRequest.builder()
@@ -111,7 +111,7 @@ class PerformClinicalExamUseCaseImplTest {
                 LocalDate.now(),
                 MedicalSlipStatus.COMPLETED,
                 UUID.randomUUID(),
-                null, null, null, null, null, null
+                null, null, null, null, null, null, null
         );
         when(medicalSlipRepositoryPort.findById(medicalSlipId)).thenReturn(Optional.of(completedSlip));
 
@@ -127,7 +127,7 @@ class PerformClinicalExamUseCaseImplTest {
                 LocalDate.now(),
                 MedicalSlipStatus.CANCELLED,
                 UUID.randomUUID(),
-                null, null, null, null, null, null
+                null, null, null, null, null, null, null
         );
         when(medicalSlipRepositoryPort.findById(medicalSlipId)).thenReturn(Optional.of(cancelledSlip));
 

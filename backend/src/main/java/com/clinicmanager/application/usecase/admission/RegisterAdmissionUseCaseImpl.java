@@ -82,7 +82,7 @@ public class RegisterAdmissionUseCaseImpl implements RegisterAdmissionUseCase {
                 LocalDate.now(),
                 MedicalSlipStatus.WAITING,
                 request.getPatientId(),
-                null, null, null, null, null, null
+                null, null, null, null, null, null, null
         );
 
         MedicalSlip savedSlip = medicalSlipRepositoryPort.save(medicalSlip);

@@ -1,9 +1,12 @@
 package com.clinicmanager.presentation.controller.examination;
 
 import com.clinicmanager.application.dto.admission.MedicalSlipDto;
+import com.clinicmanager.application.dto.examination.DiagnoseRequest;
 import com.clinicmanager.application.dto.examination.PerformClinicalExamRequest;
+import com.clinicmanager.application.port.input.examination.DiagnoseUseCase;
 import com.clinicmanager.application.port.input.examination.PerformClinicalExamUseCase;
 import com.clinicmanager.presentation.request.examination.SubmitClinicalExamRequest;
+import com.clinicmanager.presentation.request.examination.SubmitDiagnosisRequest;
 import com.clinicmanager.presentation.response.ApiResponse;
 import com.clinicmanager.presentation.response.admission.MedicalSlipResponse;
 import jakarta.validation.Valid;
@@ -17,6 +20,7 @@ import java.util.UUID;
 public class ClinicalExaminationController {
 
     private final PerformClinicalExamUseCase performClinicalExamUseCase;
+    private final DiagnoseUseCase diagnoseUseCase;
 
     @PutMapping("/{medicalSlipId}/clinical")
     public ApiResponse<MedicalSlipResponse> performClinicalExam(
@@ -45,8 +49,37 @@ public class ClinicalExaminationController {
                 .bloodPressure(resultDto.getBloodPressure())
                 .weight(resultDto.getWeight())
                 .height(resultDto.getHeight())
+                .diagnosis(resultDto.getDiagnosis())
                 .build();
 
         return ApiResponse.success(response, "Khám lâm sàng thành công.");
+    }
+
+    @PutMapping("/{medicalSlipId}/diagnosis")
+    public ApiResponse<MedicalSlipResponse> diagnose(
+            @PathVariable UUID medicalSlipId,
+            @Valid @RequestBody SubmitDiagnosisRequest request) {
+
+        DiagnoseRequest appRequest = DiagnoseRequest.builder()
+                .diagnosis(request.getDiagnosis())
+                .build();
+
+        MedicalSlipDto resultDto = diagnoseUseCase.diagnose(medicalSlipId, appRequest);
+
+        MedicalSlipResponse response = MedicalSlipResponse.builder()
+                .id(resultDto.getId())
+                .examinationDate(resultDto.getExaminationDate())
+                .status(resultDto.getStatus())
+                .patientId(resultDto.getPatientId())
+                .symptoms(resultDto.getSymptoms())
+                .pulse(resultDto.getPulse())
+                .temperature(resultDto.getTemperature())
+                .bloodPressure(resultDto.getBloodPressure())
+                .weight(resultDto.getWeight())
+                .height(resultDto.getHeight())
+                .diagnosis(resultDto.getDiagnosis())
+                .build();
+
+        return ApiResponse.success(response, "Chẩn đoán bệnh thành công.");
     }
 }
